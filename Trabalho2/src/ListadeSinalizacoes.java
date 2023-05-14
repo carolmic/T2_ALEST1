@@ -59,7 +59,7 @@ public class ListadeSinalizacoes {
 	// retorna data de implantação da iésima
 	// sinalização, para depois comparar qual
 	// é maior ou menor
-	public String getDataImplantacao(int index) {
+	public int getDataImplantacao(int index) {
 		if (index < 0 || index >= count) {
 			throw new IndexOutOfBoundsException();
 		}
@@ -82,4 +82,15 @@ public class ListadeSinalizacoes {
 
 	// reset()
 	// next()
+
+	@Override
+	public String toString() {
+		String s = "";
+		Node aux = head;
+		while (aux != null) {
+			s += aux.element + "\n";
+			aux = aux.next;
+		}
+		return s;
+	}
 }
