@@ -1,9 +1,9 @@
 public class Element {
     private String logradouro;
     private String nomeLog;
-    private ListadeSinalizacoes lista;
+    private SinalizationsList lista;
 
-    public Element(String logradouro, String nomeLog, ListadeSinalizacoes lista) {
+    public Element(String logradouro, String nomeLog, SinalizationsList lista) {
         this.logradouro = logradouro;
         this.nomeLog = nomeLog;
         this.lista = lista;
@@ -17,7 +17,7 @@ public class Element {
         return nomeLog;
     }
 
-    public ListadeSinalizacoes getLista() {
+    public SinalizationsList getLista() {
         return lista;
     }
 

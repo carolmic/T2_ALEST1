@@ -89,7 +89,7 @@ public class ArchiveReader {
                     Element element = lista.get(index);
                     element.getLista().add(sinalizacao);
                 } else {
-                    ListadeSinalizacoes lista2 = new ListadeSinalizacoes();
+                    SinalizationsList lista2 = new SinalizationsList();
                     lista2.add(sinalizacao);
                     lista.orderedAdd((new Element(logradouro, nomeLog, lista2)));
                 }
