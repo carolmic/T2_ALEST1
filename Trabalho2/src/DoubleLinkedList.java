@@ -1,3 +1,5 @@
+import java.util.HashMap;
+import java.util.Map;
 
 public class DoubleLinkedList {
     
@@ -56,13 +58,14 @@ public class DoubleLinkedList {
         return element;
     }
   
-    public String monthMostSinalizations(String nomeLog) {
-        int maior = 0;
+    public Map<String,String> monthMostSinalizations(String nomeLog) {
         int index = indexOf(nomeLog);
         Element element = get(index);
-        System.out.println(element.getLista().size());
-        maior = element.getLista().moreSinalizations();
-        return monthToString(maior);
+        Map<String, Integer> map = element.getLista().moreSinalizations();
+        Map<String, String> map2 = new HashMap<String, String>(2);
+        map2.put("mes", monthToString(map.get("mes")));
+        map2.put("quantidade", map.get("quantidade").toString());
+        return map2;
     }
 
     private String monthToString(int month) {

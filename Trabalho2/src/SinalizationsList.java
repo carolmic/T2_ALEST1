@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SinalizationsList {
 
@@ -37,8 +39,9 @@ public class SinalizationsList {
     }
 
 
-	public int moreSinalizations() {
+	public Map<String,Integer> moreSinalizations() {
         int[] months = new int[13];
+        Map<String,Integer> map = new HashMap<String,Integer>(2);
 
         Node aux = head;
         for(int i = 0; i < count; i++) {
@@ -54,8 +57,9 @@ public class SinalizationsList {
         for(int i = 1; i < months.length; i++)
             if(months[i] > months[maior])
                 maior = i;
-		
-		return maior;
+		map.put("mes", maior);
+        map.put("quantidade", months[maior]);
+		return map;
 	}
 
     public int size() { // Retorna o total de sinalizações

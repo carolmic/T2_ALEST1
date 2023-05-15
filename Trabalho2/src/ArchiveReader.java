@@ -8,8 +8,6 @@ import java.time.format.DateTimeFormatter;
 
 public class ArchiveReader {
     public static void lerPreencher(DoubleLinkedList lista) {
-      
-
         String linhas[] = new String[110000];
         int numLinhas = 0;
 
