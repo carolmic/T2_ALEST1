@@ -8,10 +8,10 @@ public class ListadeSinalizacoes {
     private int count;
 
     private class Node {
-        public Sinalizacao element;
+        public Sinalization element;
         public Node next;
 
-        public Node(Sinalizacao e) {
+        public Node(Sinalization e) {
             this.element = e;
             next = null;
         }
@@ -24,7 +24,7 @@ public class ListadeSinalizacoes {
     }
 
     // Métodos
-    public void add(Sinalizacao element) {
+    public void add(Sinalization element) {
         Node n = new Node(element);
         if (head == null) {
             head = n;
