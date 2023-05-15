@@ -18,6 +18,7 @@ public class Sinalizacao {
     private int dia;
     private int mes;
     private int ano;
+    private LocalDate date;
 
     // Metodos
     public Sinalizacao(String descricao, int anoDataExtracao, int mesDataExtracao, int diaDataExtracao,
@@ -36,6 +37,11 @@ public class Sinalizacao {
         this.dia = dia;
         this.mes = mes;
         this.ano = ano;
+        this.date = LocalDate.of(ano, mes, dia);
+    }
+
+    public LocalDate getDataImplantacao() {
+        return date;
     }
 
     public int getAnoDataExtracao() {
@@ -82,38 +88,7 @@ public class Sinalizacao {
         return ano;
     }
 
-    // @Override
-    // public String toString() {
-    // try {
-    // // Convertendo a string em um objeto Date
-    // Date date = new SimpleDateFormat("yyyy-MM-dd
-    // HH:mm:ss.SSS").parse(data_extracao);
-
-    // // Formatando a data no formato dd/mm/aaaa
-    // SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy");
-    // return formatter.format(date);
-    // } catch (Exception e) {
-    // // Tratando exceções
-    // e.printStackTrace();
-    // return null;
-    // }
-    // }
-
-    // Métodos get e toString (para data de implantação, imprimir dd/mm/aa)
-    // private void splitDataExtracao() {
-    // try {
-    // LocalDate date = LocalDate.parse(data_extracao,
-    // DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-
-    // this.dia = date.getDayOfMonth();
-    // this.mes = date.getMonthValue();
-    // this.ano = date.getYear();
-    // } catch (Exception e) {
-    // e.printStackTrace();
-    // }
-    // }
-
-
+  
 
     @Override
     public String toString() {

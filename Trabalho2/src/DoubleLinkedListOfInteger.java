@@ -1,12 +1,12 @@
 
 public class DoubleLinkedListOfInteger {
-    // Referencia para o sentinela de inicio da lista encadeada.
+    
     private Node header;
-    // Referencia para o sentinela de fim da lista encadeada.
+    
     private Node trailer;
-    // Referencia para a posicao corrente.
+    
     private Node current;
-    // Contador do numero de elementos da lista.
+    
     private int count;
 
     private class Node {
@@ -29,48 +29,98 @@ public class DoubleLinkedListOfInteger {
         count = 0;
     }
 
-    /**
-     * Adiciona um elemento ao final da lista
-     * 
-     * @param element elemento a ser adicionado ao final da lista
-     */
     public void add(Element element) {
-        // Primeiro cria o nodo
+        
         Node n = new Node(element);
-        // Primeiro conecta o novo nodo na lista
+        
         n.next = trailer;
         n.prev = trailer.prev;
-        // Depois atualiza os encadeamentos
+        
         trailer.prev.next = n;
         trailer.prev = n;
-        // Atualiza o count
+        
         count++;
     }
 
-    /**
-     * Insere um elemento em uma determinada posicao da lista
-     * 
-     * @param index   a posicao da lista onde o elemento sera inserido
-     * @param element elemento a ser inserido
-     * @throws IndexOutOfBoundsException se (index < 0 || index > size())
-     */
-    public void add(int index, Element element) throws IndexOutOfBoundsException {
-        if (index < 0 || index > count) // indice invalido
-            throw new IndexOutOfBoundsException();
-        // Implementar este método
+    public Element moreSinalizations() {
+        int num=0;
+        Element element = null;
+        Node aux = header.next;
+        for(int i = 0; i < count; i++) {
+            if(aux.element.getLista().size() > num) {
+                num = aux.element.getLista().size();
+                element = aux.element;
+            }
+            aux = aux.next;
+        }
+        return element;
+    }
+  
+    public String monthMoreSinalizations(String nomeLog) {
+        int maior = 0;
+        int index = indexOf(nomeLog);
+        Element element = get(index);
+        System.out.println(element.getLista().size());
+        maior = element.getLista().moreSinalizations();
+        return monthToString(maior);
     }
 
-    // Metodo que tem como objetivo retornar uma referencia
-    // para o nodo da posicao "index" recebida como parametro.
-    // Por exemplo, se index for 2, ele retorna a referencia
-    // para o nodo da posicao 2.
+    private String monthToString(int month) {
+        switch(month) {
+            case 1:
+                return "Janeiro";
+
+            case 2:
+                return "Fevereiro";
+
+            case 3:
+                return "Março";
+
+            case 4:
+                return "Abril";
+
+            case 5:
+                return "Maio";
+
+            case 6:
+                return "Junho";
+
+            case 7:
+                return "Julho";
+
+            case 8:
+                return "Agosto";
+
+            case 9:
+                return "Setembro";
+
+            case 10:
+                return "Outubro";
+
+            case 11:
+                return "Novembro";
+
+            case 12:
+                return "Dezembro";
+
+            default:
+                return "Mês inválido";
+        }
+    }
+
+    public void add(int index, Element element) throws IndexOutOfBoundsException {
+        if (index < 0 || index > count) 
+            throw new IndexOutOfBoundsException();
+        
+    }
+
     private Node getNodeIndex(int index) {
         Node aux = null;
-        if (index < count / 2) { // caminha do inicio para o meio
+        if (index < count / 2) { 
             aux = header.next;
             for (int i = 0; i < index; i++)
                 aux = aux.next;
-        } else { // caminha do fim para o meio
+        } else { 
             aux = trailer.prev;
             for (int i = count - 1; i > index; i--)
                 aux = aux.prev;
@@ -78,12 +128,6 @@ public class DoubleLinkedListOfInteger {
         return aux;
     }
 
-    /**
-     * Remove a primeira ocorrencia do elemento na lista, se estiver presente
-     * 
-     * @param element o elemento a ser removido
-     * @return true se a lista contem o elemento especificado
-     */
     public boolean remove(Element element) {
         Node aux = header.next;
         for (int i = 0; i < count; i++) {
@@ -97,39 +141,23 @@ public class DoubleLinkedListOfInteger {
         }
         return false;
     }
-
-    /**
-     * Remove o elemento de uma determinada posicao da lista
-     * 
-     * @param index a posicao da lista
-     * @return o elemento que foi removido da lista
-     * @throws IndexOutOfBoundsException se (index < 0 || index >= size())
-     */
+    
     public Element removeByIndex(int index) {
-        // Primeiro verifica se index eh valido
+        
         if (index < 0 || index >= count) {
             throw new IndexOutOfBoundsException();
         }
 
-        // "Caminha" ate a posicao index
+        
         Node aux = getNodeIndex(index);
 
-        // Faz a remocao
         aux.prev.next = aux.next;
         aux.next.prev = aux.prev;
         count--;
 
-        // Retorna o elemento removido
         return aux.element;
     }
-
-    /**
-     * Retorna o elemento de uma determinada posicao da lista
-     * 
-     * @param index a posicao da lista
-     * @return o elemento da posicao especificada
-     * @throws IndexOutOfBoundsException se (index < 0 || index >= size())
-     */
+    
     public Element get(int index) {
         if ((index < 0) || (index >= count)) {
             throw new IndexOutOfBoundsException();
@@ -138,47 +166,13 @@ public class DoubleLinkedListOfInteger {
         return aux.element;
     }
 
-
-    /**
-     * Substitui o elemento armanzenado em uma determinada posicao da lista pelo
-     * elemento indicado
-     * 
-     * @param index   a posicao da lista
-     * @param element o elemento a ser armazenado na lista
-     * @return o elemento armazenado anteriormente na posicao da lista
-     * @throws IndexOutOfBoundsException se (index < 0 || index >= size())
-     */
     public Element set(int index, Element element) {
         if ((index < 0) || (index >= count)) {
             throw new IndexOutOfBoundsException();
         }
-        // Implementar este método
         return null;
     }
 
-    /**
-     * Retorna um arranjo com uma copia de um subconjunto dos elementos da
-     * lista.
-     *
-     * @param fromIndex a posição inicial ("inclusive") dos elementos a serem
-     *                  incluídos
-     * @param toIndex   a posição final ("exclusive") dos elementos a serem
-     *                  incluídos
-     * @return um arranjo com um subconjunto da lista
-     * @throws IndexOutOfBoundsException se (fromIndex < 0 || toIndex > size())
-     * @throws IllegalArgumentException  se (fromIndex > toIndex)
-     */
-    // public String[] subList(int fromIndex, int toIndex) {
-    // // Implementar este método
-    // return null;
-    // }
-
-    /**
-     * Retorna true se a lista contem o elemento especificado
-     * 
-     * @param element o elemento a ser testado
-     * @return true se a lista contém o elemento especificado
-     */
     public boolean contains(String nomeLog) {
         Node aux = header.next;
         for (int i = 0; i < count; i++) {
@@ -202,15 +196,7 @@ public class DoubleLinkedListOfInteger {
         
         return null;
     }    
-    
-    /**
-     * Retorna o indice da primeira ocorrencia do elemento na lista, ou -1 se a
-     * lista não contém o elemento
-     * 
-     * @param element o elemento a ser buscado
-     * @return o indice da primeira ocorrencia do elemento na lista, ou -1 se a
-     *         lista não contém o elemento
-     */
+
     public int indexOf(String nomeLog) {
         Node aux = header.next;
         for (int i = 0; i < count; i++) {
@@ -222,9 +208,6 @@ public class DoubleLinkedListOfInteger {
         return -1;
     }
 
-    /**
-     * Esvazia a lista
-     */
     public void clear() {
         header = new Node(null);
         trailer = new Node(null);
@@ -233,20 +216,10 @@ public class DoubleLinkedListOfInteger {
         count = 0;
     }
 
-    /**
-     * Retorna o numero de elementos da lista
-     * 
-     * @return o numero de elementos da lista
-     */
     public int size() {
         return count;
     }
 
-    /**
-     * Retorna true se a lista não contem elementos
-     * 
-     * @return true se a lista não contem elementos
-     */
     public boolean isEmpty() {
         return (count == 0);
     }
@@ -309,20 +282,11 @@ public class DoubleLinkedListOfInteger {
         }
     }
 
-    /**
-     * Inicializa o current na primeira posicao (para percorrer do inicio para o
-     * fim).
-     */
+ 
     public void reset() {
         current = header.next;
     }
 
-    /**
-     * Retorna o elemento da posicao corrente e faz current apontar para o proximo
-     * elemento da lista.
-     * 
-     * @return elemento da posicao corrente
-     */
     public Element next() {
         if (current != trailer) {
             Element num = current.element;

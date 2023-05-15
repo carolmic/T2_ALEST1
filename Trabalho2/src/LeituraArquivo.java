@@ -7,7 +7,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class LeituraArquivo {
-    public DoubleLinkedListOfInteger leituraArquivo(DoubleLinkedListOfInteger lista) {
+    public static void lerPreencher(DoubleLinkedListOfInteger lista) {
+      
 
         String linhas[] = new String[110000];
         int numLinhas = 0;
@@ -19,8 +20,6 @@ public class LeituraArquivo {
             String line = reader.readLine();
             line = reader.readLine();
 
-            // System.out.println(line);
-
             while (line != null) {
                 linhas[numLinhas] = line;
                 numLinhas++;
@@ -30,15 +29,8 @@ public class LeituraArquivo {
             System.err.format("Erro na leitura do arquivo: ", e.getMessage());
         }
 
-        // Mude numLinhas para algum numero pequeno para executar testes mais
-        // rapidamente.
-        // Ex:
-        // for (int i = 0; i < 50; i++) {
-        
         long tempoInicial = System.currentTimeMillis();
         try {
-            // Scanner reader = new Scanner(new File("Trabalho2\\src\\dataEditado.txt"));
-            // System.out.println(reader.nextLine());
 
             for (int i = 0; i < numLinhas; i++) {
                 String[] campos = linhas[i].split(";");
@@ -51,18 +43,11 @@ public class LeituraArquivo {
                 int horaDataExtracao = dateTime.getHour();
                 int minDataExtracao = dateTime.getMinute();
 
-                // System.out.println("Data e hora extracao: " + diaDataExtracao + "/" + mesDataExtracao + "/" + anoDataExtracao + ", " + horaDataExtracao + ":" + minDataExtracao);
-
                 String descricao = campos[1];
-                String estado = campos[2];
-                String complemento = campos[3];
 
-                // System.out.println("Descricao: " + descricao);
-                // System.out.println("Estado: " + estado + ", " + complemento);
-
-                int anoImplantacao = 0;
-                int mesImplantacao = 0;
-                int diaImplantacao = 0;
+                int anoImplantacao = 1500;
+                int mesImplantacao = 1;
+                int diaImplantacao = 1;
                 if (!campos[4].equals("")) {
                     if (campos[4].contains("-"))
                         formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -74,13 +59,8 @@ public class LeituraArquivo {
                     diaImplantacao = date.getDayOfMonth();
                 }
 
-                // System.out.println("Data implantacao: " + diaImplantacao + "/" + mesImplantacao + "/" + anoImplantacao);
-
                 String logradouro = campos[5].split(" ", 2)[0];
                 String nomeLog = campos[5].split(" ", 2)[1];
-
-                
-                // System.out.println("Logradouro: " + logradouro + " " + nomeLog);
 
                 double numInicial;
                 if (campos[6].equals(""))
@@ -94,21 +74,17 @@ public class LeituraArquivo {
                 else
                     numFinal = Double.parseDouble(campos[7]);
 
-                String defronte = campos[8];
-                String cruzamento = campos[9];
                 String lado = campos[10];
-                String fluxo = "";
-                if (campos.length >= 12)
-                    fluxo = campos[11];
+          
                 String localInstalacao = "";
                 if (campos.length >= 13)
                     localInstalacao = campos[12];
 
-                // System.out.println("Num inicial e final: " + numInicial + ", " + numFinal + "; " + defronte + "; " + cruzamento + "; " + lado + "; " + fluxo + "; " + localInstalacao);
-                // System.out.println("---------------------------------------> " + i);
-
-                Sinalizacao sinalizacao =  new Sinalizacao(descricao, anoDataExtracao, mesDataExtracao, diaDataExtracao, horaDataExtracao, minDataExtracao, numInicial, numFinal, lado, localInstalacao, diaImplantacao, mesImplantacao, anoImplantacao);
-                if(lista.contains(nomeLog)) {
+                Sinalizacao sinalizacao = new Sinalizacao(descricao, anoDataExtracao, mesDataExtracao, diaDataExtracao,
+                        horaDataExtracao, minDataExtracao, numInicial, numFinal, lado, localInstalacao, diaImplantacao,
+                        mesImplantacao, anoImplantacao);
+               
+                if (lista.contains(nomeLog)) {
                     int index = lista.indexOf(nomeLog);
                     Element element = lista.get(index);
                     element.getLista().add(sinalizacao);
@@ -124,11 +100,9 @@ public class LeituraArquivo {
         long tempoFinal = System.currentTimeMillis();
 
         printTime(tempoFinal - tempoInicial);
-
-        return lista;
     }
 
-    private void printTime(long time) {
+    private static void printTime(long time) {
         long minutes = time / 60000;
         long seconds = (time % 60000) / 1000;
         long milis = time % 1000;
