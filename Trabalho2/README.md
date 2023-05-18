@@ -1,3 +1,3 @@
 ## To-do
--[ ] Ajustar o segundo método
--[ ] Navegation
+- [x] Ajustar o segundo método
+- [ ] Navegation
