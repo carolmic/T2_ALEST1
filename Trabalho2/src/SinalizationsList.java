@@ -38,29 +38,28 @@ public class SinalizationsList {
 
     }
 
-
-	public Map<String,Integer> moreSinalizations() {
+    public Map<String, Integer> moreSinalizations() {
         int[] months = new int[13];
-        Map<String,Integer> map = new HashMap<String,Integer>(2);
+        Map<String, Integer> map = new HashMap<String, Integer>(2);
 
         Node aux = head;
-        for(int i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++) {
             for (int j = 1; j <= 12; j++)
                 if (aux.element.getMes() == j) {
                     months[0]++;
                     months[j]++;
                 }
-            aux = aux.next;     
+            aux = aux.next;
         }
-        
+
         int maior = 1;
-        for(int i = 1; i < months.length; i++)
-            if(months[i] > months[maior])
+        for (int i = 1; i < months.length; i++)
+            if (months[i] > months[maior])
                 maior = i;
-		map.put("mes", maior);
+        map.put("mes", maior);
         map.put("quantidade", months[maior]);
-		return map;
-	}
+        return map;
+    }
 
     public int size() { // Retorna o total de sinalizações
         return count;
