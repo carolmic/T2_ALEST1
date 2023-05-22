@@ -3,14 +3,13 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class App {
-   Scanner in;
+    Scanner in;
 
-   DoubleLinkedList lista;
+    DoubleLinkedList lista;
 
-    
-    public App () {
+    public App() {
 
-        in = new Scanner (System.in);
+        in = new Scanner(System.in);
         lista = new DoubleLinkedList();
         ArchiveReader.lerPreencher(lista);
     }
@@ -19,24 +18,24 @@ public class App {
         boolean ok;
         int opcao = 0;
         do {
-        do {
-            ok = true;
-            menu();
-            try {
-            opcao = in.nextInt();
-            } catch (InputMismatchException e) {
-                in.nextLine();
-                ok = false;
-                System.out.println("Tipo incorreto. Redigite.");
-            } catch (Exception e1) {
-                in.nextLine();
-                ok = false;
-                e1.printStackTrace();
-                System.out.println("Redigite.");
-            }
-    } while (!ok);
+            do {
+                ok = true;
+                menu();
+                try {
+                    opcao = in.nextInt();
+                } catch (InputMismatchException e) {
+                    in.nextLine();
+                    ok = false;
+                    System.out.println("Tipo incorreto. Redigite.");
+                } catch (Exception e1) {
+                    in.nextLine();
+                    ok = false;
+                    e1.printStackTrace();
+                    System.out.println("Redigite.");
+                }
+            } while (!ok);
             in.nextLine();
-            switch(opcao) {
+            switch (opcao) {
                 case 1:
                     mostSinalization();
                     break;
@@ -48,8 +47,8 @@ public class App {
                     break;
                 case 0:
                     break;
-        }
-    } while (opcao != 0);
+            }
+        } while (opcao != 0);
     }
 
     public void menu() {
@@ -61,37 +60,50 @@ public class App {
         System.out.println("[3] Modo navegação");
         System.out.println("[0] Sair do sistema");
         System.out.println("========================================");
-   }
+    }
 
-   public void mostSinalization() {
+    public void mostSinalization() {
         Element element = lista.moreSinalizations();
-        System.out.println("Rua/Av/Trav com mais sinalizações registradas: " + element.getNomeLog() + " -> " + element.getLista().size() + " sinalizações.");
-   }
+        System.out.println("Rua/Av/Trav com mais sinalizações registradas: " + element.getNomeLog() + " -> "
+                + element.getLista().size() + " sinalizações.");
+    }
 
-   public void monthMostSinalization() {
-        System.out.println("Digite o nome da rua/av/trav que você deseja saber o mês em que foram mais implementadas sinalizações: ");
-        String nome = in.nextLine().toUpperCase();
-        Map<String, String> map = lista.monthMostSinalizations(nome);
-        System.out.println("Mês em que foram implementadas mais sinalizações em " + nome + ": " + map.get("mes") + " -> " + map.get("quantidade"));
-   }
+    public void monthMostSinalization() {
+        Map<String, String> map = lista.monthMostSinalizations();
+        System.out.println("Mês em que foram implementadas mais sinalizações: " + map.get("mes") + " -> "
+                + map.get("quantidade") + " sinalizações.");
 
-   public void navegationMode() {
-    
-   }
-    // public static void main(String[] args) {
-       
-    //     DoubleLinkedList lista = new DoubleLinkedList();
-    //     ArchiveReader.lerPreencher(lista);
-  
-    //     String nome = "WALDOMIRO SCHAPKE";
-    //     int index = lista.indexOf(nome);
-    //     Element test = lista.get(index);
-    //     System.out.println("QUANTIDADE:  " + test.getLista().size());
-    //     System.out.println("Mês com mais sinalizações: " +  lista.monthMostSinalizations(nome)); 
-   
-    //     System.out.println("Mais sinalizações registradas: " + lista.moreSinalizations().getNomeLog() + "Quantidade:" + lista.moreSinalizations().getLista().size());
-    // }
+    }
+
+    /**
+     * Permitir entrar em um modo de navegacao. Onde ́e possıvel navegar pelas
+     * rua/av/trav, isto ́e,
+     * avan ̧car e retroceder, apresentando o n ́umero total de sinaliza ̧c ̃oes
+     * desta rua/av/trav e qual foi a
+     * primeira e a ́ultima sinaliza ̧c ̃ao registrada na rua.
+     */
+    public void navegationMode() {
+        System.out.println("Indique um index entre 0 e " + (lista.size() - 1) + " para iniciar a navegação: ");
+        int index = 0;
+        String n = null;
+        boolean ok = true;
+        Element element;
+        index = in.nextInt();
+        while (ok) {
+            element = lista.get(index);
+            System.out
+                    .println(element.getNomeLog() + element.getLista().size() + element.getLista().getDataImplantacao(0)
+                            + element.getLista().getDataImplantacao(element.getLista().size() - 1));
+        }
+        n = in.nextLine();
+        if (n == "n") {
+            index++;
+        }
+        if (n == "b") {
+            index--;
+        } else
+            ok = false;
+
+    }
+
 }
-
-
-// 
