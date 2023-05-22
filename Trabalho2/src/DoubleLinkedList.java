@@ -88,13 +88,6 @@ public class DoubleLinkedList {
         return map;
     }
 
-    public Element Navigate(int index) {
-        if (index < 0 || index >= size()) {
-            index = 0;
-        }
-        return null;
-    }
-
     private String monthToString(int month) {
         switch (month) {
             case 1:
@@ -245,10 +238,6 @@ public class DoubleLinkedList {
         count = 0;
     }
 
-    public Element navigation(int index) {
-        Element element = get(index);
-        return element;
-    }
 
     public int size() {
         return count;

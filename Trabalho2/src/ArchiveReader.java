@@ -11,7 +11,7 @@ public class ArchiveReader {
         String linhas[] = new String[110000];
         int numLinhas = 0;
 
-        Path filePath = Paths.get("Trabalho2/src/dataEditado.csv");
+        Path filePath = Paths.get("src/dataEditado.csv");
 
         // Ler o arquivo
         try (BufferedReader reader = Files.newBufferedReader(filePath)) {

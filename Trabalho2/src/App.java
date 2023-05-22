@@ -2,6 +2,8 @@ import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
 
+
+
 public class App {
     Scanner in;
 
@@ -70,39 +72,58 @@ public class App {
 
     public void monthMostSinalization() {
         Map<String, String> map = lista.monthMostSinalizations();
-        System.out.println("Mês em que foram implementadas mais sinalizações: " + map.get("mes") + " -> "
-                + map.get("quantidade") + " sinalizações.");
-
+        System.out.println("Mês em que foram implementadas mais sinalizações: " + map.get("mes")
+                + " -> " + map.get("quantidade"));
     }
 
-    /**
-     * Permitir entrar em um modo de navegacao. Onde ́e possıvel navegar pelas
-     * rua/av/trav, isto ́e,
-     * avan ̧car e retroceder, apresentando o n ́umero total de sinaliza ̧c ̃oes
-     * desta rua/av/trav e qual foi a
-     * primeira e a ́ultima sinaliza ̧c ̃ao registrada na rua.
-     */
     public void navegationMode() {
-        System.out.println("Indique um index entre 0 e " + (lista.size() - 1) + " para iniciar a navegação: ");
-        int index = 0;
-        String n = null;
-        boolean ok = true;
+        boolean ok;
+        int opcao;
         Element element;
-        index = in.nextInt();
-        while (ok) {
-            element = lista.get(index);
-            System.out
-                    .println(element.getNomeLog() + element.getLista().size() + element.getLista().getDataImplantacao(0)
-                            + element.getLista().getDataImplantacao(element.getLista().size() - 1));
+        System.out.println("Indique um index entre 0 e 3125 para iniciar a navegação:");
+        int index = in.nextInt();
+        element = lista.get(index);
+        System.out.println("========================================");
+        for (int i = index - 2; i <= index + 2; i++) {
+            if (i == index) {
+                int tam = element.getLista().size();
+                System.out.println("--> " + element.getNomeLog() + ": " + "\n " + "Total de sinalizações = "
+                        + tam + "\n" + " Primeira sinalização = " + element.getLista().getDataImplantacao(0) + "\n"
+                        + " Última sinalização = " + element.getLista().getDataImplantacao(tam - 1) + " <--" + "\n");
+            } else {
+                System.out.println("[" + lista.get(i).getNomeLog() + "]" + "\n");
+            }
         }
-        n = in.nextLine();
-        if (n == "n") {
-            index++;
-        }
-        if (n == "b") {
-            index--;
-        } else
-            ok = false;
+        System.out.println("========================================");
+        do {
+            ok = true;
+            System.out.println(
+                    "Para avançar, selecione [2]. Para retroceder, selecione [1]. Para sair do modo navegação, selecione [0].");
+            opcao = in.nextInt();
+            if (opcao == 2) {
+                index++;
+                element = lista.get(index);
+            }
+            if (opcao == 1) {
+                index--;
+                element = lista.get(index);
+            }
+            if (opcao == 0) {
+                ok = false;
+            }
+            System.out.println("========================================");
+            for (int i = index - 2; i <= index + 2; i++) {
+                if (i == index) {
+                    int tam = element.getLista().size();
+                    System.out.println("--> " + element.getNomeLog() + ": " + "\n " + "Total de sinalizações = "
+                            + tam + "\n" + " Primeira sinalização = " + element.getLista().getDataImplantacao(0) + "\n"
+                            + " Última sinalização = " + element.getLista().getDataImplantacao(tam - 1) + " <--" + "\n");
+                } else {
+                    System.out.println("["+ lista.get(i).getNomeLog()+ "]" + "\n");
+                }
+            }
+            System.out.println("========================================");
+        } while (ok);
 
     }
 
