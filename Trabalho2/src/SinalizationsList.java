@@ -97,10 +97,44 @@ public class SinalizationsList {
         return aux.element.getDataImplantacao();
     }
 
-    // getMenorData() // retorna a data da primeira sinalização instalada
-    // (considerando esta lista)
-    // getMaiorData() // retorna a data da última sinalização instalada
-    // (considerando esta lista)
+    public LocalDate getMenorData() { // retorna a data da primeira sinalização instalada
+        Node aux = head.next;
+        Node ant = head;
+        LocalDate menorData = ant.element.getDataImplantacao();
+        for (int i=0; i < count; i++) {
+            if (aux == null) {
+                return menorData;
+            }
+            LocalDate date1 = aux.element.getDataImplantacao();
+          
+            if (date1.compareTo(menorData) <= 0) {
+                menorData = date1;
+            
+            ant = ant.next; 
+            aux = aux.next; 
+        }
+    }
+    return menorData;
+    } 
+    public LocalDate getMaiorData() { // retorna a data da última sinalização instalada
+        Node aux = head.next;
+        Node ant = head;
+        LocalDate maiorData = ant.element.getDataImplantacao();
+        for (int i=0; i < count; i++) {
+            if (aux == null) {
+                return maiorData;
+            }
+            LocalDate date1 = aux.element.getDataImplantacao();
+       
+            if (date1.compareTo(maiorData) >= 0) {
+                maiorData = date1;
+            }
+            ant = ant.next; 
+            aux = aux.next; 
+        }
+        return maiorData;
+    }
+ 
 
     @Override
     public String toString() {
