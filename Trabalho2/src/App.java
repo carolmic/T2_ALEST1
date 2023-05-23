@@ -2,8 +2,6 @@ import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
 
-
-
 public class App {
     Scanner in;
 
@@ -48,6 +46,7 @@ public class App {
                     navegationMode();
                     break;
                 case 0:
+                    System.out.println("Até mais! Obrigada por utilizar o nosso sistema.");
                     break;
             }
         } while (opcao != 0);
@@ -55,7 +54,6 @@ public class App {
 
     public void menu() {
         System.out.println("========================================");
-        System.out.println("Bem-vindo ao modo de navegação:");
         System.out.println("Selecione a opção desejada:");
         System.out.println("[1] Apresentar a rua/av/trav com mais sinalizações registradas");
         System.out.println("[2] Apresentar o mês em que foram implementadas mais sinalizações em uma rua/av/trav");
@@ -78,52 +76,159 @@ public class App {
 
     public void navegationMode() {
         boolean ok;
-        int opcao;
-        Element element;
+        int opcao = -1;
+        int index = -1;
+        Element element = null;
         System.out.println("Indique um index entre 0 e 3125 para iniciar a navegação:");
-        int index = in.nextInt();
-        element = lista.get(index);
-        System.out.println("========================================");
-        for (int i = index - 2; i <= index + 2; i++) {
-            if (i == index) {
-                int tam = element.getLista().size();
-                System.out.println("--> " + element.getNomeLog() + ": " + "\n " + "Total de sinalizações = "
-                        + tam + "\n" + " Primeira sinalização = " + element.getLista().getDataImplantacao(0) + "\n"
-                        + " Última sinalização = " + element.getLista().getDataImplantacao(tam - 1) + " <--" + "\n");
-            } else {
-                System.out.println("[" + lista.get(i).getNomeLog() + "]" + "\n");
-            }
-        }
-        System.out.println("========================================");
         do {
             ok = true;
-            System.out.println(
-                    "Para avançar, selecione [2]. Para retroceder, selecione [1]. Para sair do modo navegação, selecione [0].");
-            opcao = in.nextInt();
-            if (opcao == 2) {
-                index++;
+            try {
+                index = in.nextInt();
                 element = lista.get(index);
-            }
-            if (opcao == 1) {
-                index--;
-                element = lista.get(index);
-            }
-            if (opcao == 0) {
+            } catch (InputMismatchException e) {
+                in.nextLine();
                 ok = false;
+                System.out.println("Tipo incorreto. Por favor, redigite.");
+            } catch (IndexOutOfBoundsException e2) {
+                in.nextLine();
+                ok = false;
+                System.out.println("Índice inválido. Por favor, redigite.");
+            } catch (Exception e1) {
+                in.nextLine();
+                ok = false;
+                e1.printStackTrace();
+                System.out.println("Por favor, redigite.");
             }
-            System.out.println("========================================");
-            for (int i = index - 2; i <= index + 2; i++) {
-                if (i == index) {
-                    int tam = element.getLista().size();
-                    System.out.println("--> " + element.getNomeLog() + ": " + "\n " + "Total de sinalizações = "
-                            + tam + "\n" + " Primeira sinalização = " + element.getLista().getDataImplantacao(0) + "\n"
-                            + " Última sinalização = " + element.getLista().getDataImplantacao(tam - 1) + " <--" + "\n");
-                } else {
-                    System.out.println("["+ lista.get(i).getNomeLog()+ "]" + "\n");
+            if (index < 2) {
+                for (int i = index; i <= index + 2; i++) {
+                    if (i == index) {
+                        int tam = element.getLista().size();
+                        System.out.println("--> " + element.getNomeLog() + ": " + "\n " + "Total de sinalizações = "
+                                + tam + "\n" + " Primeira sinalização = " + element.getLista().getDataImplantacao(0)
+                                + "\n"
+                                + " Última sinalização = " + element.getLista().getDataImplantacao(tam - 1) + " <--"
+                                + "\n");
+                    } else {
+                        System.out.println("[" + lista.get(i).getNomeLog() + "]" + "\n");
+                    }
+                }
+            } else if (index > 3123) {
+                for (int i = index -2; i <= index; i++) {
+                    if (i == index) {
+                        int tam = element.getLista().size();
+                        System.out.println("--> " + element.getNomeLog() + ": " + "\n " + "Total de sinalizações = "
+                                + tam + "\n" + " Primeira sinalização = " + element.getLista().getDataImplantacao(0)
+                                + "\n"
+                                + " Última sinalização = " + element.getLista().getDataImplantacao(tam - 1) + " <--"
+                                + "\n");
+                    } else {
+                        System.out.println("[" + lista.get(i).getNomeLog() + "]" + "\n");
+                    }
+                }
+            } 
+            else {
+                for (int i = index - 2; i <= index + 2; i++) {
+                    if (i == index) {
+                        int tam = element.getLista().size();
+                        System.out.println("--> " + element.getNomeLog() + ": " + "\n " + "Total de sinalizações = "
+                                + tam + "\n" + " Primeira sinalização = " + element.getLista().getDataImplantacao(0)
+                                + "\n"
+                                + " Última sinalização = " + element.getLista().getDataImplantacao(tam - 1) + " <--"
+                                + "\n");
+                    } else {
+                        System.out.println("[" + lista.get(i).getNomeLog() + "]" + "\n");
+                    }
                 }
             }
-            System.out.println("========================================");
-        } while (ok);
+
+            do {
+                ok = true;
+                System.out.println(
+                        "Para avançar, selecione [2]. Para retroceder, selecione [1]. Para sair do modo navegação, selecione [0].");
+                do {
+                    ok = true;
+                    try {
+                        opcao = in.nextInt();
+                    } catch (InputMismatchException e) {
+                        in.nextLine();
+                        ok = false;
+                        System.out.println("Tipo incorreto. Por favor, redigite.");
+                    } catch (Exception e1) {
+                        in.nextLine();
+                        ok = false;
+                        e1.printStackTrace();
+                        System.out.println("Por favor, redigite.");
+                    }
+                    
+                if (opcao == 2) {
+                    if ( index >= 3125) {
+                        System.out.println("Você está no fim da lista.");
+                        break;
+                    } else {
+                        index++;
+                        element = lista.get(index);
+                    }
+                } else if (opcao == 1) {
+                    if (index <= 0) {
+                        System.out.println("Você está no início da lista.");
+                        break;
+                    } else {
+                        index--;
+                        element = lista.get(index); }
+
+                } else if (opcao == 0) {
+                    ok = false;
+                } else {
+                    ok = false;
+                    System.out.println("Opção incorreta. Tente novamente.");
+                    break;
+                }
+                } while (!ok);
+
+                if (index < 2) {
+                    for (int i = index; i <= index + 2; i++) {
+                        if (i == index) {
+                            int tam = element.getLista().size();
+                            System.out.println("--> " + element.getNomeLog() + ": " + "\n " + "Total de sinalizações = "
+                                    + tam + "\n" + " Primeira sinalização = " + element.getLista().getDataImplantacao(0)
+                                    + "\n"
+                                    + " Última sinalização = " + element.getLista().getDataImplantacao(tam - 1) + " <--"
+                                    + "\n");
+                        } else {
+                            System.out.println("[" + lista.get(i).getNomeLog() + "]" + "\n");
+                        }
+                    }
+                } else if (index > 3123) {
+                    for (int i = index -2; i <= index; i++) {
+                        if (i == index) {
+                            int tam = element.getLista().size();
+                            System.out.println("--> " + element.getNomeLog() + ": " + "\n " + "Total de sinalizações = "
+                                    + tam + "\n" + " Primeira sinalização = " + element.getLista().getDataImplantacao(0)
+                                    + "\n"
+                                    + " Última sinalização = " + element.getLista().getDataImplantacao(tam - 1) + " <--"
+                                    + "\n");
+                        } else {
+                            System.out.println("[" + lista.get(i).getNomeLog() + "]" + "\n");
+                        }
+                    }
+                } 
+                else {
+                    for (int i = index - 2; i <= index + 2; i++) {
+                        if (i == index) {
+                            int tam = element.getLista().size();
+                            System.out.println("--> " + element.getNomeLog() + ": " + "\n " + "Total de sinalizações = "
+                                    + tam + "\n" + " Primeira sinalização = " + element.getLista().getDataImplantacao(0)
+                                    + "\n"
+                                    + " Última sinalização = " + element.getLista().getDataImplantacao(tam - 1) + " <--"
+                                    + "\n");
+                        } else {
+                            System.out.println("[" + lista.get(i).getNomeLog() + "]" + "\n");
+                        }
+                    }
+                }
+            } while (ok);
+        } while (!ok);
+
 
     }
 

@@ -25,7 +25,6 @@ public class SinalizationsList {
         count = 0;
     }
 
-    // Métodos
     public void add(Sinalization element) {
         Node n = new Node(element);
         if (head == null) {
@@ -38,8 +37,7 @@ public class SinalizationsList {
 
     }
 
-
-	public Map<String,Integer> moreSinalizations() {
+	public Map<String,Integer> moreSinalizations() { //Método que indica o mês com mais sinalizações na lista, e qual a quantidade de sinalizações
         int[] months = new int[13];
         Map<String,Integer> map = new HashMap<String,Integer>(2);
 
@@ -62,11 +60,11 @@ public class SinalizationsList {
 		return map;
 	}
 
-    public int size() { // Retorna o total de sinalizações
+    public int size() { 
         return count;
     }
 
-    public int getMonth(int index) { // retorna o mês de implantação da iésima sinalização
+    public int getMonth(int index) { // Método que retorna o mês de implantação da iésima sinalização
         if (index < 0 || index >= count) {
             throw new IndexOutOfBoundsException();
         }
@@ -83,7 +81,7 @@ public class SinalizationsList {
         return aux.element.getMes();
     }
 
-    public LocalDate getDataImplantacao(int index) {
+    public LocalDate getDataImplantacao(int index) { // Método que retorna a data de implantação da sinalização localizada no index indicado
         if (index < 0 || index >= count) {
             throw new IndexOutOfBoundsException();
         }
@@ -103,9 +101,6 @@ public class SinalizationsList {
     // (considerando esta lista)
     // getMaiorData() // retorna a data da última sinalização instalada
     // (considerando esta lista)
-
-    // reset()
-    // next()
 
     @Override
     public String toString() {

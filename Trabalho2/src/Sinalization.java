@@ -1,7 +1,4 @@
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Sinalization {
     // Atributos
