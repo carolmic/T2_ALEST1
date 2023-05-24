@@ -3,4 +3,4 @@
 - [x] Ajustar o segundo método
 - [x] Navegation
 - [x] Tratar os inputs do Navegation
-- [ ] Métodos comentados da SinalizationList -> atualizar o navigation (primeira e última sinalização)
+- [x] Métodos comentados da SinalizationList -> atualizar o navigation (primeira e última sinalização)
